@@ -10,7 +10,7 @@ const Services = () => {
     { id: 'business', name: '营业厅服务' },
     { id: 'ai-image', name: 'AI电商图片' },
     { id: 'ai-video', name: 'AI视频创作' },
-    { id: 'tech-support', name: '技术支持' }
+    { id: 'web-dev', name: '网站开发业务' }
   ]
   
   // 保险产品数据
@@ -505,7 +505,7 @@ const Services = () => {
                 {/* 案例效果展示 */}
                 <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
                   <h3 style={{ fontSize: '1.5rem', marginBottom: '24px', textAlign: 'center' }}>案例效果展示</h3>
-                  <div style={{ padding: '24px', border: '1px solid var(--border-color)', borderRadius: '8px', backgroundColor: 'rgba(22, 93, 255, 0.05)' }}>
+                  <div style={{ padding: '24px', border: '1px solid var(--border-color)', borderRadius: '8px', backgroundColor: 'rgba(255, 125, 0, 0.05)' }}>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', alignItems: 'center' }}>
                       <div style={{ order: 2, md: 1 }}>
                         <h4 style={{ fontSize: '1.25rem', marginBottom: '16px', color: 'var(--primary-color)' }}>某电商平台产品视频案例</h4>
@@ -542,28 +542,28 @@ const Services = () => {
               </div>
             )}
             
-            {/* 技术支持板块 */}
+            {/* 网站开发业务板块 */}
             {activeTab === 5 && (
               <div style={{ animation: 'fadeInUp 0.5s ease' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', md: 'row', gap: '40px' }}>
                   <div style={{ flex: 1 }}>
                     <h2 style={{ fontSize: '2rem', marginBottom: '20px', color: 'var(--primary-color)' }}>
-                      技术支持
+                      网站开发业务
                     </h2>
                     <p style={{ marginBottom: '24px', fontSize: '1.05rem' }}>
-                      我们拥有一支专业的技术支持团队，为您提供全方位的技术支持和咨询服务。
-                      无论是系统故障、技术难题还是业务咨询，我们都能为您提供及时、有效的解决方案。
+                      我们拥有专业的网站开发团队，为您提供全方位的网站建设和技术开发服务。
+                      无论是企业官网、电商平台还是定制化Web应用，我们都能打造符合您需求的现代化网站解决方案。
                     </p>
                     
                     <div style={{ marginBottom: '32px' }}>
-                      <h3 style={{ fontSize: '1.25rem', marginBottom: '16px' }}>我们的技术支持服务</h3>
+                      <h3 style={{ fontSize: '1.25rem', marginBottom: '16px' }}>我们的网站开发服务</h3>
                       <ul style={{ listStyle: 'none', padding: 0 }}>
                         {[
-                          '7×24小时技术支持热线',
-                          '远程协助和故障排除',
-                          '系统升级和维护',
-                          '技术培训和咨询',
-                          '定制化技术解决方案'
+                          '响应式网站设计与开发',
+                          '电商平台建设',
+                          '企业官网定制',
+                          'Web应用程序开发',
+                          '网站优化与维护'
                         ].map((item, index) => (
                           <li key={index} style={{ marginBottom: '12px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
                             <span style={{ fontSize: '1.25rem', color: 'var(--secondary-color)' }}>✓</span>
@@ -574,14 +574,14 @@ const Services = () => {
                     </div>
                     
                     <div style={{ marginBottom: '32px' }}>
-                      <h3 style={{ fontSize: '1.25rem', marginBottom: '16px' }}>支持方式</h3>
+                      <h3 style={{ fontSize: '1.25rem', marginBottom: '16px' }}>技术栈</h3>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
                         {[
-                          { name: '在线客服', icon: '💬', time: '工作时间在线' },
-                          { name: '电话支持', icon: '📞', time: '7×24小时服务' },
-                          { name: '邮件支持', icon: '✉️', time: '24小时内回复' },
-                          { name: '远程协助', icon: '🖥️', time: '预约服务' }
-                        ].map((method, index) => (
+                          { name: '前端开发', icon: '🎨', tech: 'React, Vue, Angular' },
+                          { name: '后端开发', icon: '⚙️', tech: 'Node.js, Python, Java' },
+                          { name: '数据库', icon: '🗄️', tech: 'MySQL, MongoDB, Redis' },
+                          { name: '云服务', icon: '☁️', tech: 'AWS, 阿里云, 腾讯云' }
+                        ].map((tech, index) => (
                           <div key={index} style={{
                             padding: '16px',
                             border: '1px solid var(--border-color)',
@@ -591,10 +591,10 @@ const Services = () => {
                             alignItems: 'center',
                             gap: '12px'
                           }}>
-                            <span style={{ fontSize: '1.5rem' }}>{method.icon}</span>
+                            <span style={{ fontSize: '1.5rem' }}>{tech.icon}</span>
                             <div>
-                              <h4 style={{ fontSize: '1.125rem', marginBottom: '4px' }}>{method.name}</h4>
-                              <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>{method.time}</p>
+                              <h4 style={{ fontSize: '1.125rem', marginBottom: '4px' }}>{tech.name}</h4>
+                              <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>{tech.tech}</p>
                             </div>
                           </div>
                         ))}
@@ -602,34 +602,35 @@ const Services = () => {
                     </div>
                     
                     <button className="btn btn-primary">
-                      获取技术支持
+                      咨询网站开发
                     </button>
                   </div>
                   
                   <div style={{ flex: 1 }}>
                     <div style={{ padding: '24px', border: '1px solid var(--border-color)', borderRadius: '8px', backgroundColor: 'white', marginBottom: '24px' }}>
-                      <h3 style={{ fontSize: '1.25rem', marginBottom: '20px' }}>常见问题</h3>
+                      <h3 style={{ fontSize: '1.25rem', marginBottom: '20px' }}>开发流程</h3>
                       <div style={{ display: 'grid', gap: '16px' }}>
                         {[
-                          { question: '如何申请技术支持？', answer: '您可以通过在线客服、电话、邮件等方式联系我们，我们会尽快为您提供帮助。' },
-                          { question: '远程协助需要准备什么？', answer: '请确保您的设备已连接网络，并准备好相关的问题描述和截图。' },
-                          { question: '技术支持是否收费？', answer: '基础技术支持是免费的，复杂的定制化服务可能需要收取相应费用。' },
-                          { question: '响应时间是多久？', answer: '我们会在接到请求后的30分钟内响应，紧急问题会优先处理。' }
-                        ].map((faq, index) => (
+                          { step: '需求分析', desc: '深入了解您的业务需求和目标用户群体' },
+                          { step: '原型设计', desc: '制作网站原型和UI设计稿，确认页面布局' },
+                          { step: '技术开发', desc: '前端和后端同步开发，确保功能完整实现' },
+                          { step: '测试优化', desc: '全面测试网站功能，优化性能和用户体验' },
+                          { step: '部署上线', desc: '将网站部署到服务器，正式上线运行' },
+                          { step: '维护支持', desc: '提供长期的技术支持和网站维护服务' }
+                        ].map((process, index) => (
                           <div key={index}>
-                            <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '8px', color: 'var(--primary-color)' }}>{faq.question}</h4>
-                            <p style={{ color: 'var(--text-secondary)', marginBottom: '16px', fontSize: '0.95rem' }}>{faq.answer}</p>
-                            {index < 3 && <div style={{ height: '1px', backgroundColor: 'var(--border-color)' }}></div>}
+                            <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '8px', color: 'var(--primary-color)' }}>{process.step}</h4>
+                            <p style={{ color: 'var(--text-secondary)', marginBottom: '16px', fontSize: '0.95rem' }}>{process.desc}</p>
+                            {index < 5 && <div style={{ height: '1px', backgroundColor: 'var(--border-color)' }}></div>}
                           </div>
                         ))}
                       </div>
                     </div>
                     
                     <div style={{ padding: '24px', border: '1px solid var(--border-color)', borderRadius: '8px', backgroundColor: 'rgba(255, 125, 0, 0.05)' }}>
-                      <h3 style={{ fontSize: '1.25rem', marginBottom: '16px', color: 'var(--secondary-color)' }}>紧急支持</h3>
-                      <p style={{ marginBottom: '16px' }}>如果您遇到紧急技术问题，请立即联系我们的紧急支持热线：</p>
-                      <div style={{ fontSize: '1.5rem', fontWeight: '600', color: 'var(--secondary-color)', marginBottom: '16px' }}>138 8888 8888</div>
-                      <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>我们的技术专家会在最短的时间内为您解决问题</p>
+                      <h3 style={{ fontSize: '1.25rem', marginBottom: '16px', color: 'var(--secondary-color)' }}>定制化解决方案</h3>
+                      <p style={{ marginBottom: '16px' }}>我们根据您的具体需求，提供量身定制的网站开发解决方案，确保每个项目都能完美契合您的业务发展。</p>
+                      <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>从简单的展示网站到复杂的业务系统，我们都有丰富的开发经验</p>
                     </div>
                   </div>
                 </div>

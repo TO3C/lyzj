@@ -7,6 +7,8 @@ import Services from './pages/Services'
 import About from './pages/About'
 import Cases from './pages/Cases'
 import Contact from './pages/Contact'
+import AdminDashboard from './pages/AdminDashboard'
+import './pages/admin.css'
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/cases" element={<Cases />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>
         <Footer />

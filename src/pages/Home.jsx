@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import StaticTechBackground from '../components/StaticTechBackground'
 
 const Home = () => {
   // 业务服务数据
@@ -30,9 +31,9 @@ const Home = () => {
       description: 'AI视频创作服务，作品展示视频墙，专业创作流程，案例效果展示'
     },
     {
-      icon: '🔧',
-      title: '技术支持',
-      description: '提供专业的技术支持和咨询服务，解决各类技术难题'
+      icon: '💻',
+      title: '网站开发业务',
+      description: '专业网站开发服务，定制化解决方案，打造现代化企业网站'
     }
   ]
   
@@ -57,12 +58,12 @@ const Home = () => {
 
   return (
     <div className="home">
-      {/* 首屏大图 */}
+      {/* 首屏大图 - 静态科技感背景 */}
       <section className="hero">
+        <StaticTechBackground />
         <div className="hero-content">
-          <h1 className="hero-title">科技赋能，智领未来</h1>
-          <p className="hero-subtitle">三亚综合性科技服务商，为您提供全方位的科技解决方案</p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          {/* 按钮区域 */}
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '300px' }}>
             <Link to="/services" className="btn btn-primary">
               了解服务
             </Link>
@@ -96,44 +97,9 @@ const Home = () => {
         </div>
       </section>
       
-      {/* 核心优势 */}
-      <section className="advantages-section">
-        <div className="container">
-          <h2 className="section-title">核心优势</h2>
-          <div className="advantages-grid">
-            {advantages.map((advantage, index) => (
-              <div key={index} className="advantage-card">
-                <div className="advantage-number">{advantage.number}</div>
-                <h3 className="advantage-title">{advantage.title}</h3>
-                <p className="advantage-description">{advantage.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
       
-      {/* 号召性行动 */}
-      <section style={{
-        backgroundColor: 'var(--primary-color)',
-        color: 'white',
-        padding: '60px 0',
-        textAlign: 'center'
-      }}>
-        <div className="container">
-          <h2 style={{ marginBottom: '20px', fontSize: '2rem' }}>
-            准备好开启您的科技之旅了吗？
-          </h2>
-          <p style={{ marginBottom: '32px', fontSize: '1.125rem', opacity: '0.9' }}>
-            联系我们，了解如何通过科技赋能您的业务
-          </p>
-          <Link to="/contact" className="btn" style={{
-            backgroundColor: 'white',
-            color: 'var(--primary-color)'
-          }}>
-            立即咨询
-          </Link>
-        </div>
-      </section>
+
     </div>
   )
 }
