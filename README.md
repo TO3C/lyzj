@@ -91,9 +91,28 @@ npm run dev-server
 - **POST /api/users/login** - 管理员登录
 - **GET /api/users/me** - 获取当前登录用户信息（需要认证）
 
+## GitHub Pages 部署
+
+本项目已配置 GitHub Actions 自动部署到 GitHub Pages：
+
+- **仓库地址**：https://github.com/TO3C/lyzj
+- **部署地址**：https://TO3C.github.io/lyzj/
+- **自动部署**：推送到 main 分支后自动触发部署
+
+### 更新网站内容
+
+```bash
+# 修改文件后
+git add .
+git commit -m "更新内容描述"
+git push origin main
+# 🎉 自动部署完成
+```
+
 ## 注意事项
 
 1. 首次登录管理员界面后，请立即修改默认密码
 2. 确保MongoDB服务正在运行
 3. 生产环境中，请使用强密码和安全的JWT密钥
 4. 定期备份数据库以防止数据丢失
+5. GitHub Pages 仅部署前端静态文件，后端API需要单独部署
