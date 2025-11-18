@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import contactRoutes from './routes/contact.js';
-import userRoutes from './routes/user.js';
 
 // 修复 ES Module 中 __dirname 不可用问题
 const __filename = fileURLToPath(import.meta.url);
@@ -33,7 +32,6 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // 路由
 app.use('/api/contact', contactRoutes);
-app.use('/api/users', userRoutes);
 
 // 生产环境下提供静态文件
 if (process.env.NODE_ENV === 'production') {
