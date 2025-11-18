@@ -45,6 +45,14 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        
+        {/* 版权和备案信息 */}
+        <div className="footer-bottom">
+          <div className="footer-copyright">
+            <p>&copy; 2025 流云智炬科技 版权所有</p>
+            <p className="icp-number">琼ICP备2025064801号</p>
+          </div>
+        </div>
       </div>
     </footer>
   )

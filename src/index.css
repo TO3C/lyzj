@@ -445,6 +445,15 @@ body {
   transition: all var(--transition-normal);
 }
 
+.service-card.clickable {
+  cursor: pointer;
+}
+
+.service-card.clickable:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
 .service-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
@@ -493,8 +502,13 @@ body {
   transition: all var(--transition-normal);
 }
 
-.advantage-card:hover {
+.advantage-card.clickable {
+  cursor: pointer;
+}
+
+.advantage-card.clickable:hover {
   box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
 }
 
 .advantage-number {
@@ -602,6 +616,28 @@ body {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.875rem;
+}
+
+.footer-copyright {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-copyright p {
+  margin: 0;
+}
+
+.icp-number {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.icp-number:hover {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* 表单样式 */
