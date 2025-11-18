@@ -18,9 +18,7 @@ const Header = () => {
   const navLinks = [
     { label: '首页', path: '/' },
     { label: '业务服务', path: '/services' },
-    { label: '关于我们', path: '/about' },
-    { label: '案例展示', path: '/cases' },
-    { label: '联系方式', path: '/contact' }
+    { label: '案例展示', path: '/cases' }
   ]
 
   return (

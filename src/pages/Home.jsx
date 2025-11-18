@@ -51,19 +51,19 @@ const Home = () => {
       number: '01',
       title: '专业团队',
       description: '拥有一支经验丰富的专业团队，具备深厚的行业知识和技术积累，为客户提供最专业的服务',
-      route: '/about#team'
+      route: '/services'
     },
     {
       number: '02',
       title: '技术创新',
       description: '不断进行技术创新，引入最新的AI技术和解决方案，为客户创造更大价值',
-      route: '/about#innovation'
+      route: '/services'
     },
     {
       number: '03',
       title: '优质服务',
       description: '以客户为中心，提供7×24小时的优质服务，确保客户需求得到及时响应和解决',
-      route: '/about#service'
+      route: '/services'
     }
   ]
 
@@ -86,8 +86,8 @@ const Home = () => {
             <Link to="/services" className="btn btn-primary">
               了解服务
             </Link>
-            <Link to="/contact" className="btn btn-secondary">
-              联系我们
+            <Link to="/cases" className="btn btn-secondary">
+              查看案例
             </Link>
           </div>
         </div>
@@ -95,6 +95,9 @@ const Home = () => {
       
       {/* 业务概览 */}
       <section className="services-section">
+        <div className="tech-line-1"></div>
+        <div className="tech-line-2"></div>
+        <div className="tech-line-3"></div>
         <div className="container">
           <h2 className="section-title">业务服务</h2>
           <div className="services-grid">
