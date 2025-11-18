@@ -12,7 +12,7 @@ import './pages/admin.css'
 
 function App() {
   return (
-    <Router>
+    <Router basename="/lyzj">
       <div className="app">
         <Header />
         <main className="main-content">
