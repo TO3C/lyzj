@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试页面 - 流云智炬科技</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .info {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .success {
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .details {
+            margin-top: 30px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 流云智炬科技</h1>
+        <div class="success">✅ 部署成功！</div>
+        <div class="info">当前时间：<span id="time"></span></div>
+        <div class="info">访问路径：<span id="path"></span></div>
+        <div class="info">User Agent：<span id="ua"></span></div>
+        
+        <div class="details">
+            <p>如果您看到这个页面，说明：</p>
+            <p>✓ GitHub Pages 部署正常工作</p>
+            <p>✓ HTML 文件可以正常访问</p>
+            <p>✓ CSS 样式正常加载</p>
+            <p>✓ JavaScript 正常执行</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('time').textContent = new Date().toLocaleString('zh-CN');
+        document.getElementById('path').textContent = window.location.pathname;
+        document.getElementById('ua').textContent = navigator.userAgent.substring(0, 50) + '...';
+        
+        console.log('测试页面加载成功！');
+        console.log('当前路径:', window.location.pathname);
+        console.log('完整URL:', window.location.href);
+    </script>
+</body>
+</html>
