@@ -29,7 +29,7 @@ const Footer = () => {
             <div className="qrcode-container">
               <div className="qrcode">
                 <img 
-                  src="/images/enterprise.jpg" 
+                  src="./images/enterprise.jpg" 
                   alt="企业微信二维码" 
                   style={{
                     width: '100%',
