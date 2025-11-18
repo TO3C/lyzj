@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试页面 - 流云智炬科技</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .status {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+        .success {
+            background: rgba(76, 175, 80, 0.3);
+            border: 2px solid #4caf50;
+        }
+        .info {
+            background: rgba(33, 150, 243, 0.3);
+            border: 2px solid #2196f3;
+        }
+        .test-link {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .test-link:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 流云智炬科技测试页面</h1>
+        
+        <div class="status success">
+            <h2>✅ HTML 加载成功</h2>
+            <p>如果您能看到这个页面，说明 GitHub Pages 基础部署正常工作！</p>
+        </div>
+
+        <div class="status info">
+            <h2>📋 部署信息</h2>
+            <p><strong>当前时间:</strong> <span id="current-time"></span></p>
+            <p><strong>页面URL:</strong> <span id="page-url"></span></p>
+            <p><strong>用户代理:</strong> <span id="user-agent"></span></p>
+        </div>
+
+        <div class="status info">
+            <h2>🔧 测试结果</h2>
+            <p><strong>CSS样式:</strong> ✅ 正常加载</p>
+            <p><strong>JavaScript:</strong> ✅ 正常执行</p>
+            <p><strong>响应式设计:</strong> ✅ 正常工作</p>
+        </div>
+
+        <a href="/lyzj/" class="test-link">🏠 返回首页</a>
+        <a href="/lyzj/admin" class="test-link">⚙️ 管理后台</a>
+
+        <div style="margin-top: 40px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+            <h3>📞 联系我们</h3>
+            <p>流云智炬科技 - 您值得信赖的科技合作伙伴</p>
+            <p>服务热线：138-0750-5982</p>
+        </div>
+    </div>
+
+    <script>
+        // 显示当前时间
+        document.getElementById('current-time').textContent = new Date().toLocaleString('zh-CN');
+        
+        // 显示页面URL
+        document.getElementById('page-url').textContent = window.location.href;
+        
+        // 显示用户代理
+        document.getElementById('user-agent').textContent = navigator.userAgent.substring(0, 50) + '...';
+        
+        // 测试控制台输出
+        console.log('✅ 流云智炬科技测试页面加载成功！');
+        console.log('📊 页面信息:', {
+            url: window.location.href,
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent
+        });
+    </script>
+</body>
+</html>
