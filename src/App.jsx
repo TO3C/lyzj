@@ -10,7 +10,7 @@ import Contact from './pages/Contact'
 
 function App() {
   return (
-    <Router basename="/lyzj">
+    <Router>
       <div className="app">
         <Header />
         <main className="main-content">
