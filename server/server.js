@@ -16,14 +16,16 @@ dotenv.config();
 const app = express();
 
 // 中间件
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://to3c.github.io', 'https://lyzj.com'] 
+    : ['http://localhost:5173', 'http://localhost:3000'],
+  credentials: true
+}));
 app.use(express.json());
 
 // 连接到MongoDB数据库
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('MongoDB数据库连接成功'))
 .catch(err => {
   console.log('MongoDB数据库连接失败:', err);

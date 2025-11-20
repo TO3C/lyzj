@@ -1,0 +1,307 @@
+/* 联系表单区域样式 */
+.contact-section {
+  padding: 80px 20px;
+  margin: 0;
+  background: #0a0a0a;
+  position: relative;
+  overflow: hidden;
+}
+/* 网状背景已移除 */
+
+/* 科技线条装饰 - 已移除 */
+.tech-line-1,
+.tech-line-2,
+.tech-line-3 {
+  display: none;
+}
+
+/* 发光圆形装饰 */
+.glowing-circle-1,
+.glowing-circle-2 {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.glowing-circle-1 {
+  top: 10%;
+  right: 10%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(22, 93, 255, 0.3), transparent 70%);
+  animation: glowingPulse1 4s ease-in-out infinite;
+}
+
+.glowing-circle-2 {
+  bottom: 15%;
+  left: 8%;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(255, 125, 0, 0.2), transparent 70%);
+  animation: glowingPulse2 5s ease-in-out infinite;
+}
+
+/* 动画效果 */
+@keyframes techLineMove1 {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(30px) translateY(-10px); }
+}
+
+@keyframes techLineMove2 {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-20px) translateY(15px); }
+}
+
+@keyframes techLineMove3 {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(40px) translateY(-5px); }
+}
+
+@keyframes glowingPulse1 {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+}
+
+@keyframes glowingPulse2 {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% { 
+    transform: scale(1.3);
+    opacity: 0.2;
+  }
+}
+
+.contact-form-container {
+  max-width: 700px;
+  margin: 0 0 0 auto;
+  padding: 40px 30px;
+  background: linear-gradient(145deg, rgba(22, 93, 255, 0.08), rgba(0, 212, 255, 0.04));
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(22, 93, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 10;
+  /* 移除蓝色边框 */
+  overflow: hidden;
+}
+
+/* 科技感边框动画 - 已移除 */
+.contact-form-container::before {
+  display: none;
+}
+
+/* 科技感扫描线效果 - 已移除 */
+.contact-form-container::after {
+  display: none;
+}
+
+@keyframes scanLine {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: -100%; }
+}
+
+.contact-form-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.contact-form-header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 15px;
+  margin-top: 0;
+  background: linear-gradient(135deg, #165DFF, #00D4FF, #165DFF);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(22, 93, 255, 0.5);
+  animation: gradientFlow 3s ease-in-out infinite;
+  letter-spacing: 1px;
+}
+
+.contact-form-header p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0;
+  letter-spacing: 0.5px;
+}
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  align-items: start;
+}
+
+.form-row {
+  display: contents;
+}
+
+.form-row .form-group {
+  margin-bottom: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  font-size: 1.05rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  color: white;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.2),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  transform: translateY(-1px);
+  /* 移除蓝色边框 */
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.submit-btn {
+  grid-column: 1 / -1;
+  width: 100%;
+  padding: 18px 30px;
+  background: linear-gradient(135deg, #165DFF, #00D4FF);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(22, 93, 255, 0.3);
+  margin-top: 25px;
+  /* 移除蓝色边框 */
+}
+
+.submit-btn::before {
+  /* 移除内部光线效果 */
+  display: none;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(22, 93, 255, 0.4),
+    0 0 20px rgba(22, 93, 255, 0.2);
+}
+
+.submit-btn:hover::before {
+  display: none;
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(22, 93, 255, 0.3);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.success-message,
+.error-message {
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.success-message {
+  background: rgba(52, 211, 153, 0.1);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 60px 20px;
+    margin: 20px 10px;
+  }
+  
+  .contact-form-container {
+    padding: 30px 20px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .contact-form-header h2 {
+    font-size: 2rem;
+  }
+  
+  .tech-line-1,
+  .tech-line-2,
+  .tech-line-3 {
+    display: none;
+  }
+  
+  .glowing-circle-1,
+  .glowing-circle-2 {
+    display: none;
+  }
+}

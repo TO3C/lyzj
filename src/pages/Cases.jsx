@@ -299,28 +299,73 @@ const Cases = () => {
         </div>
       </section>
       
-      {/* 咨询案例制作 */}
-      <section style={{
-        backgroundColor: 'var(--primary-color)',
-        color: 'white',
-        padding: '60px 0',
-        textAlign: 'center'
-      }}>
-        <div className="container">
-          <h2 style={{ marginBottom: '20px', fontSize: '2rem' }}>
-            想了解更多案例或定制您的AI创作方案？
-          </h2>
-          <p style={{ marginBottom: '32px', fontSize: '1.125rem', opacity: '0.9', maxWidth: '700px', marginLeft: 'auto', marginRight: 'auto' }}>
-            联系我们，我们的专业团队将为您提供定制化的解决方案
-          </p>
-          <button className="btn" style={{
-            backgroundColor: 'white',
-            color: 'var(--primary-color)' 
-          }}>
-            立即咨询
-          </button>
+      {/* Footer内容 */}
+      <div className="container" style={{ marginTop: '60px' }}>
+        <div className="footer-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '40px', marginBottom: '40px' }}>
+          {/* 公司信息 */}
+          <div style={{ flex: 1, minWidth: '300px' }}>
+            <h3 style={{ fontSize: '1.25rem', marginBottom: '16px', color: 'var(--primary-color)' }}>流云数字科技</h3>
+            <p style={{ marginBottom: '16px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+              专注于AI数字人技术、短视频创作、直播运营等数字化服务，为企业提供全方位的数字化解决方案。
+            </p>
+            <div style={{ marginBottom: '16px' }}>
+              <p style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '1rem', color: 'var(--primary-color)' }}>📍</span>
+                <span>北京市朝阳区建国门外大街1号</span>
+              </p>
+              <p style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '1rem', color: 'var(--primary-color)' }}>📧</span>
+                <span>contact@liuyun-digital.com</span>
+              </p>
+              <p style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '1rem', color: 'var(--primary-color)' }}>📱</span>
+                <span>400-123-4567</span>
+              </p>
+            </div>
+          </div>
+          
+          {/* 企业微信二维码 */}
+          <div style={{ textAlign: 'center', minWidth: '200px' }}>
+            <h4 style={{ fontSize: '1.125rem', marginBottom: '16px', color: 'var(--primary-color)' }}>企业微信</h4>
+            <div style={{ 
+              width: '150px', 
+              height: '150px', 
+              backgroundColor: '#f5f5f5', 
+              border: '1px solid var(--border-color)',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 12px'
+            }}>
+              <span style={{ fontSize: '3rem' }}>📱</span>
+            </div>
+            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>扫码添加企业微信</p>
+          </div>
         </div>
-      </section>
+        
+        {/* 版权备案信息 */}
+        <div className="footer-bottom" style={{ 
+          borderTop: '1px solid var(--border-color)', 
+          paddingTop: '20px',
+          textAlign: 'left'
+        }}>
+          <div className="footer-copyright" style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'flex-start',
+            flexWrap: 'wrap',
+            gap: '12px'
+          }}>
+            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
+              © 2024 流云数字科技. 保留所有权利.
+            </p>
+            <p className="icp-number" style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
+              京ICP备2024088888号-1
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

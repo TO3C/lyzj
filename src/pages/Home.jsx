@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import StaticTechBackground from '../components/StaticTechBackground'
+import ContactForm from '../components/ContactForm'
+import './Home.css'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -44,34 +46,8 @@ const Home = () => {
       route: '/services#web-development'
     }
   ]
-  
-  // 核心优势数据
-  const advantages = [
-    {
-      number: '01',
-      title: '专业团队',
-      description: '拥有一支经验丰富的专业团队，具备深厚的行业知识和技术积累，为客户提供最专业的服务',
-      route: '/services'
-    },
-    {
-      number: '02',
-      title: '技术创新',
-      description: '不断进行技术创新，引入最新的AI技术和解决方案，为客户创造更大价值',
-      route: '/services'
-    },
-    {
-      number: '03',
-      title: '优质服务',
-      description: '以客户为中心，提供7×24小时的优质服务，确保客户需求得到及时响应和解决',
-      route: '/services'
-    }
-  ]
 
   const handleServiceClick = (route) => {
-    navigate(route)
-  }
-
-  const handleAdvantageClick = (route) => {
     navigate(route)
   }
 
@@ -95,9 +71,7 @@ const Home = () => {
       
       {/* 业务概览 */}
       <section className="services-section">
-        <div className="tech-line-1"></div>
-        <div className="tech-line-2"></div>
-        <div className="tech-line-3"></div>
+        {/* 科技线条装饰 - 已移除 */}
         <div className="container">
           <h2 className="section-title">业务服务</h2>
           <div className="services-grid">
@@ -115,33 +89,11 @@ const Home = () => {
               </div>
             ))}
           </div>
-          <div className="text-center mt-5">
-            <Link to="/services" className="btn btn-outline">
-              查看全部服务
-            </Link>
-          </div>
         </div>
       </section>
       
-      {/* 核心优势 */}
-      <section className="advantages-section">
-        <div className="container">
-          <h2 className="section-title">核心优势</h2>
-          <div className="advantages-grid">
-            {advantages.map((advantage, index) => (
-              <div 
-                key={index} 
-                className="advantage-card clickable"
-                onClick={() => handleAdvantageClick(advantage.route)}
-              >
-                <div className="advantage-number">{advantage.number}</div>
-                <h3 className="advantage-title">{advantage.title}</h3>
-                <p className="advantage-description">{advantage.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* 联系表单 */}
+      <ContactForm />
     </div>
   )
 }

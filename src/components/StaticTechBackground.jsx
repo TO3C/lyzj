@@ -3,15 +3,9 @@ import React from 'react';
 const StaticTechBackground = () => {
   return (
     <div className="static-tech-background">
-      {/* 网格背景 */}
-      <div className="grid-overlay"></div>
+      {/* 网格背景已移除 */}
       
-      {/* 科技感装饰线条 */}
-      <div className="tech-lines">
-        <div className="tech-line tech-line-1"></div>
-        <div className="tech-line tech-line-2"></div>
-        <div className="tech-line tech-line-3"></div>
-      </div>
+      {/* 科技感装饰线条 - 已移除 */}
       
       {/* 发光圆形装饰 */}
       <div className="glowing-circles">
