@@ -46,3 +46,4 @@ coverage/
 server/mongodb-macos-x86_64-7.0.5.tgz
 server/data/
 server/mongodb.log.*
+server/mongodb-macos-x86_64-7.0.5/
