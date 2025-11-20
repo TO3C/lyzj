@@ -30,17 +30,21 @@ const ContactForm = () => {
     setSubmitStatus('');
 
     try {
-      // 使用Formspree作为表单提交服务
-      const formResponse = await fetch('https://formspree.io/f/xjvnlzvw', {
+      // 使用Web3Forms作为表单提交服务（免费且无需注册）
+      const formResponse = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
         },
         body: JSON.stringify({
-          ...formData,
-          _subject: `流云智炬科技 - ${formData.subject}`,
-          _replyto: formData.email
+          access_key: 'YOUR_ACCESS_KEY', // 需要在web3forms.com获取免费密钥
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: `流云智炬科技 - ${formData.subject}`,
+          message: formData.message,
+          from_name: '流云智炬科技网站',
+          reply_to: formData.email
         })
       });
 
@@ -54,16 +58,22 @@ const ContactForm = () => {
           message: ''
         });
         
-        // 显示成功消息
         alert('信息提交成功！我们会尽快与您联系。');
       } else {
-        const errorData = await formResponse.json();
-        throw new Error(errorData.message || '提交失败');
+        throw new Error('表单提交失败');
       }
     } catch (error) {
       console.error('提交错误:', error);
       setSubmitStatus('error');
-      alert('提交失败，请稍后重试或直接联系我们：296077990@qq.com');
+      
+      // 如果第三方服务失败，提供备选方案
+      const mailtoLink = `mailto:296077990@qq.com?subject=${encodeURIComponent(`流云智炬科技 - ${formData.subject}`)}&body=${encodeURIComponent(
+        `客户称呼：${formData.name}\n邮箱：${formData.email}\n电话：${formData.phone}\n\n需求描述：\n${formData.message}`
+      )}`;
+      
+      if (confirm('在线提交服务暂时不可用，是否打开邮件客户端联系我们？')) {
+        window.location.href = mailtoLink;
+      }
     } finally {
       setIsSubmitting(false);
       setTimeout(() => setSubmitStatus(''), 5000);
@@ -231,6 +241,35 @@ const ContactForm = () => {
               </div>
             )}
           </form>
+          
+          {/* 备用联系方式 */}
+          <div style={{ marginTop: '20px', padding: '15px', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px' }}>
+            <p style={{ margin: '0 0 10px 0', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+              其他联系方式：
+            </p>
+            <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+              <a 
+                href="mailto:296077990@qq.com" 
+                style={{ 
+                  color: 'var(--primary-color)', 
+                  textDecoration: 'none',
+                  fontSize: '0.875rem'
+                }}
+              >
+                📧 发送邮件
+              </a>
+              <a 
+                href="tel:13800138000" 
+                style={{ 
+                  color: 'var(--primary-color)', 
+                  textDecoration: 'none',
+                  fontSize: '0.875rem'
+                }}
+              >
+                📞 电话咨询
+              </a>
+            </div>
+          </div>
         </div>
       </div>
       
