@@ -10,6 +10,8 @@ const ContactForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -22,33 +24,43 @@ const ContactForm = () => {
     e.preventDefault();
     
     if (!formData.name || !formData.email || !formData.message) {
-      alert('请填写必填字段');
+      setError('请填写所有必填字段');
       return;
     }
 
     setIsSubmitting(true);
+    setError('');
+    setSuccess(false);
     setSubmitStatus('');
 
+    const web3formsData = {
+      access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '26e054a0-5885-4bca-b677-7f7869d8c4aa',
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      subject: `来自${import.meta.env.VITE_COMPANY_NAME || '流云智炬科技'}网站的咨询：${formData.subject}`,
+      message: formData.message,
+      from_name: import.meta.env.VITE_COMPANY_NAME || '流云智炬科技',
+      reply_to: formData.email
+    };
+
     try {
-      // 使用Web3Forms作为表单提交服务（免费且无需注册）
-      const formResponse = await fetch('https://api.web3forms.com/submit', {
+      console.log('正在提交表单到Web3Forms...', web3formsData);
+      
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          access_key: 'YOUR_ACCESS_KEY', // 需要在web3forms.com获取免费密钥
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          subject: `流云智炬科技 - ${formData.subject}`,
-          message: formData.message,
-          from_name: '流云智炬科技网站',
-          reply_to: formData.email
-        })
+        body: JSON.stringify(web3formsData)
       });
 
-      if (formResponse.ok) {
+      const result = await response.json();
+      console.log('Web3Forms响应:', result);
+
+      if (response.ok && result.success) {
+        setSuccess(true);
         setSubmitStatus('success');
         setFormData({
           name: '',
@@ -57,26 +69,27 @@ const ContactForm = () => {
           subject: '联系咨询',
           message: ''
         });
-        
-        alert('信息提交成功！我们会尽快与您联系。');
       } else {
-        throw new Error('表单提交失败');
+        // 如果Web3Forms失败，显示备用方案
+        console.warn('Web3Forms提交失败，启用备用方案:', result.message);
+        throw new Error(result.message || '表单提交服务暂时不可用');
       }
     } catch (error) {
-      console.error('提交错误:', error);
+      console.error('表单提交错误:', error);
       setSubmitStatus('error');
       
-      // 如果第三方服务失败，提供备选方案
-      const mailtoLink = `mailto:296077990@qq.com?subject=${encodeURIComponent(`流云智炬科技 - ${formData.subject}`)}&body=${encodeURIComponent(
-        `客户称呼：${formData.name}\n邮箱：${formData.email}\n电话：${formData.phone}\n\n需求描述：\n${formData.message}`
-      )}`;
-      
-      if (confirm('在线提交服务暂时不可用，是否打开邮件客户端联系我们？')) {
-        window.location.href = mailtoLink;
-      }
+      // 显示备用联系方式
+      setError(`表单提交服务暂时不可用。请通过以下方式联系我们：
+        
+📧 邮箱：${import.meta.env.VITE_CONTACT_EMAIL || '296077990@qq.com'}
+📱 电话：186 8966 2512
+🏢 地址：${import.meta.env.VITE_COMPANY_ADDRESS || '三亚市吉阳区迎宾路智慧中心大厦15层'}
+
+或者直接发送邮件到：${import.meta.env.VITE_CONTACT_EMAIL || '296077990@qq.com'}
+
+错误详情：${error.message}`);
     } finally {
       setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus(''), 5000);
     }
   };
 
@@ -167,6 +180,35 @@ const ContactForm = () => {
           </div>
           
           <form className="contact-form" onSubmit={handleSubmit}>
+            {error && (
+              <div style={{ 
+                marginBottom: '20px', 
+                padding: '15px', 
+                backgroundColor: '#fee', 
+                border: '1px solid #fcc', 
+                borderRadius: '8px',
+                color: '#c33',
+                fontSize: '0.875rem',
+                lineHeight: '1.5'
+              }}>
+                <p style={{ margin: 0, whiteSpace: 'pre-line' }}>{error}</p>
+              </div>
+            )}
+            
+            {success && (
+              <div style={{ 
+                marginBottom: '20px', 
+                padding: '15px', 
+                backgroundColor: '#efe', 
+                border: '1px solid #cfc', 
+                borderRadius: '8px',
+                color: '#3c3',
+                fontSize: '0.875rem'
+              }}>
+                <p style={{ margin: 0 }}>✅ 信息提交成功！我们会尽快与您联系。</p>
+              </div>
+            )}
+            
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="name">客户称呼</label>
@@ -203,7 +245,6 @@ const ContactForm = () => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                required
                 placeholder="请输入您的联系电话"
               />
             </div>

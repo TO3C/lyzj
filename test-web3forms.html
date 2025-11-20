@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3Forms测试 - 流云智炬科技</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(238, 90, 36, 0.4);
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+        .success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+            color: #4caf50;
+        }
+        .error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+            color: #f44336;
+        }
+        .info {
+            background: rgba(33, 150, 243, 0.2);
+            border: 1px solid #2196f3;
+            color: #2196f3;
+        }
+        .config-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Web3Forms功能测试</h1>
+        
+        <div class="config-info">
+            <strong>配置信息：</strong><br>
+            Access Key: 26e054a0-5885-4bca-b677-7f7869d8c4aa<br>
+            接收邮箱: 296077990@qq.com<br>
+            API端点: https://api.web3forms.com/submit
+        </div>
+
+        <form id="testForm">
+            <div class="form-group">
+                <label for="name">姓名 *</label>
+                <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">邮箱 *</label>
+                <input type="email" id="email" name="email" required placeholder="请输入您的邮箱">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">电话</label>
+                <input type="tel" id="phone" name="phone" placeholder="请输入您的电话号码">
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">主题 *</label>
+                <input type="text" id="subject" name="subject" required placeholder="请输入咨询主题">
+            </div>
+            
+            <div class="form-group">
+                <label for="message">消息内容 *</label>
+                <textarea id="message" name="message" required placeholder="请详细描述您的需求或问题..."></textarea>
+            </div>
+            
+            <button type="submit" id="submitBtn">
+                📤 提交测试
+            </button>
+        </form>
+        
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('testForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusDiv = document.getElementById('status');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ 提交中...';
+            statusDiv.innerHTML = '';
+
+            const formData = new FormData(form);
+            const data = {
+                access_key: '26e054a0-5885-4bca-b677-7f7869d8c4aa',
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                subject: `流云智炬科技测试 - ${formData.get('subject')}`,
+                message: formData.get('message'),
+                from_name: 'Web3Forms测试页面',
+                reply_to: formData.get('email')
+            };
+
+            try {
+                console.log('提交数据:', data);
+                
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                console.log('响应结果:', result);
+
+                if (response.ok && result.success) {
+                    statusDiv.className = 'status success';
+                    statusDiv.innerHTML = `
+                        ✅ <strong>提交成功！</strong><br>
+                        消息已发送到 296077990@qq.com<br>
+                        响应ID: ${result.message_id || 'N/A'}<br>
+                        请检查邮箱收件箱和垃圾邮件文件夹。
+                    `;
+                    form.reset();
+                } else {
+                    throw new Error(result.message || '提交失败');
+                }
+            } catch (error) {
+                console.error('提交错误:', error);
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = `
+                    ❌ <strong>提交失败</strong><br>
+                    错误信息: ${error.message}<br>
+                    请检查网络连接和配置信息。
+                `;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '📤 提交测试';
+            }
+        });
+
+        // 页面加载时显示配置信息
+        window.addEventListener('load', () => {
+            console.log('Web3Forms测试页面已加载');
+            console.log('Access Key:', '26e054a0-5885-4bca-b677-7f7869d8c4aa');
+        });
+    </script>
+</body>
+</html>
