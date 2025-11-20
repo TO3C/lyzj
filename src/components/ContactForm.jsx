@@ -30,17 +30,21 @@ const ContactForm = () => {
     setSubmitStatus('');
 
     try {
-      const response = await fetch('/api/contact', {
+      // 使用Formspree作为表单提交服务
+      const formResponse = await fetch('https://formspree.io/f/xjvnlzvw', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          _subject: `流云智炬科技 - ${formData.subject}`,
+          _replyto: formData.email
+        })
       });
 
-      const data = await response.json();
-      
-      if (response.ok) {
+      if (formResponse.ok) {
         setSubmitStatus('success');
         setFormData({
           name: '',
@@ -49,14 +53,17 @@ const ContactForm = () => {
           subject: '联系咨询',
           message: ''
         });
+        
+        // 显示成功消息
+        alert('信息提交成功！我们会尽快与您联系。');
       } else {
-        setSubmitStatus('error');
-        alert(data.message || '提交失败，请稍后重试');
+        const errorData = await formResponse.json();
+        throw new Error(errorData.message || '提交失败');
       }
     } catch (error) {
       console.error('提交错误:', error);
       setSubmitStatus('error');
-      alert('提交时发生错误，请检查网络连接');
+      alert('提交失败，请稍后重试或直接联系我们：296077990@qq.com');
     } finally {
       setIsSubmitting(false);
       setTimeout(() => setSubmitStatus(''), 5000);
@@ -65,8 +72,6 @@ const ContactForm = () => {
 
   return (
     <section className="contact-section">
-      {/* 科技线条装饰 - 已移除 */}
-      
       {/* 发光圆形装饰 */}
       <div className="glowing-circle-1"></div>
       <div className="glowing-circle-2"></div>
