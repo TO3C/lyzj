@@ -22,17 +22,18 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!formData.name || !formData.email || !formData.message) {
-      setError('请填写所有必填字段');
-      return;
-    }
-
     setIsSubmitting(true);
     setError('');
     setSuccess(false);
-    setSubmitStatus('');
 
+    // 基本验证
+    if (!formData.name || !formData.email || !formData.message) {
+      setError('请填写所有必填字段');
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Web3Forms数据结构
     const web3formsData = {
       access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '26e054a0-5885-4bca-b677-7f7869d8c4aa',
       name: formData.name,
@@ -53,7 +54,8 @@ const ContactForm = () => {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(web3formsData)
+        body: JSON.stringify(web3formsData),
+        signal: AbortSignal.timeout(10000) // 10秒超时
       });
 
       const result = await response.json();
@@ -79,15 +81,19 @@ const ContactForm = () => {
       setSubmitStatus('error');
       
       // 显示备用联系方式
-      setError(`表单提交服务暂时不可用。请通过以下方式联系我们：
-        
-📧 邮箱：${import.meta.env.VITE_CONTACT_EMAIL || '296077990@qq.com'}
-📱 电话：186 8966 2512
-🏢 地址：${import.meta.env.VITE_COMPANY_ADDRESS || '三亚市吉阳区迎宾路智慧中心大厦15层'}
+      setError(`🚫 在线表单服务暂时不可用
 
-或者直接发送邮件到：${import.meta.env.VITE_CONTACT_EMAIL || '296077990@qq.com'}
+📧 **推荐联系方式：**
+   邮箱：${import.meta.env.VITE_CONTACT_EMAIL || '296077990@qq.com'}
+   📱 电话：186 8966 2512
+   🏢 地址：${import.meta.env.VITE_COMPANY_ADDRESS || '三亚市吉阳区迎宾路智慧中心大厦15层'}
 
-错误详情：${error.message}`);
+💡 **快速联系：**
+   • 直接发送邮件到：${import.meta.env.VITE_CONTACT_EMAIL || '296077990@qq.com'}
+   • 扫码添加企业微信（右侧二维码）
+   • 我们会在收到消息后第一时间回复您
+
+⚠️ 技术详情：${error.message}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -183,15 +189,26 @@ const ContactForm = () => {
             {error && (
               <div style={{ 
                 marginBottom: '20px', 
-                padding: '15px', 
-                backgroundColor: '#fee', 
-                border: '1px solid #fcc', 
-                borderRadius: '8px',
-                color: '#c33',
-                fontSize: '0.875rem',
-                lineHeight: '1.5'
+                padding: '20px', 
+                backgroundColor: '#fff3cd', 
+                border: '1px solid #ffeaa7', 
+                borderRadius: '12px',
+                color: '#856404',
+                fontSize: '0.9rem',
+                lineHeight: '1.6',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
               }}>
-                <p style={{ margin: 0, whiteSpace: 'pre-line' }}>{error}</p>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                  <span style={{ fontSize: '1.2rem', marginTop: '-2px' }}>⚠️</span>
+                  <div>
+                    <p style={{ margin: '0 0 10px 0', fontWeight: '600', fontSize: '1rem' }}>
+                      在线表单暂时不可用
+                    </p>
+                    <p style={{ margin: 0, whiteSpace: 'pre-line', fontSize: '0.9rem' }}>
+                      {error}
+                    </p>
+                  </div>
+                </div>
               </div>
             )}
             
