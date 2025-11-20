@@ -3,6 +3,7 @@ import Contact from '../models/Contact.js';
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import crypto from 'crypto'
 import { sendContactNotification, sendCustomerConfirmation } from '../services/emailService.js';
 import notificationManager from '../services/notificationManager.js';
 
@@ -146,47 +147,76 @@ router.get('/', async (req, res) => {
     return res.status(401).json({ message: '需要管理员API密钥' });
   }
   try {
-    let contacts = [];
+    let allContacts = [];
+    let localContacts = [];
+    let dbContacts = [];
     
-    // 首先尝试从MongoDB获取数据
+    // 1. 首先读取本地文件数据
     try {
-      const dbContacts = await Contact.find({}).sort({ createdAt: -1 });
-      contacts = dbContacts;
-    } catch (dbError) {
-      console.log('MongoDB连接失败，尝试读取本地文件');
-    }
-    
-    // 如果MongoDB没有数据或连接失败，读取本地文件
-    if (contacts.length === 0) {
-      try {
-        if (fs.existsSync(SUBMISSIONS_PATH)) {
-          const raw = fs.readFileSync(SUBMISSIONS_PATH, 'utf-8');
-          const lines = raw.split('\n').filter(Boolean);
-          contacts = lines.map(line => {
-            try {
-              const data = JSON.parse(line);
-              // 添加_id字段以保持兼容性
-              return {
-                _id: `local-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-                ...data
-              };
-            } catch (e) {
-              return null;
+      if (fs.existsSync(SUBMISSIONS_PATH)) {
+        const raw = fs.readFileSync(SUBMISSIONS_PATH, 'utf-8');
+        const lines = raw.split('\n').filter(Boolean);
+        localContacts = lines.map((line, index) => {
+          try {
+            const data = JSON.parse(line);
+            // 如果数据没有_id字段，生成一个稳定的ID
+            if (!data._id) {
+              // 使用行号和内容hash生成稳定ID，确保每次读取都是相同的ID
+              const timestamp = new Date(data.createdAt || Date.now()).getTime();
+              const hash = crypto.createHash('md5')
+                .update(`${data.name}${data.email}${timestamp}${index}`)
+                .digest('hex').substr(0, 8);
+              data._id = `local-${timestamp}-${hash}`;
             }
-          }).filter(Boolean).reverse();
-        }
-      } catch (fileError) {
-        console.log('读取本地文件失败:', fileError);
+            return data;
+          } catch (e) {
+            console.log(`解析本地文件第${index + 1}行失败:`, e.message);
+            return null;
+          }
+        }).filter(Boolean);
+        console.log(`成功读取本地文件数据: ${localContacts.length} 条`);
       }
+    } catch (fileError) {
+      console.log('读取本地文件失败:', fileError);
     }
     
-    // 如果仍然没有数据，返回空数组而不是模拟数据
-    if (contacts.length === 0) {
-      console.log('没有找到联系信息数据');
-      return res.json([]);
+    // 2. 尝试从MongoDB获取数据
+    try {
+      dbContacts = await Contact.find({}).sort({ createdAt: -1 });
+    } catch (dbError) {
+      console.log('MongoDB连接失败，仅使用本地文件数据');
     }
     
-    res.json(contacts);
+    // 3. 合并数据，避免重复（基于name+email+createdAt判断重复）
+    const combinedContacts = [];
+    const seenKeys = new Set();
+    
+    // 先添加本地数据
+    localContacts.forEach(contact => {
+      const key = `${contact.name}_${contact.email}_${contact.createdAt}`;
+      if (!seenKeys.has(key)) {
+        combinedContacts.push(contact);
+        seenKeys.add(key);
+      }
+    });
+    
+    // 再添加数据库数据（排除重复的）
+    dbContacts.forEach(contact => {
+      const key = `${contact.name}_${contact.email}_${contact.createdAt}`;
+      if (!seenKeys.has(key)) {
+        combinedContacts.push(contact);
+        seenKeys.add(key);
+      }
+    });
+    
+    // 按创建时间倒序排列
+    allContacts = combinedContacts.sort((a, b) => 
+      new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+    );
+    
+    console.log(`返回数据统计: 本地文件 ${localContacts.length} 条, MongoDB ${dbContacts.length} 条, 合并去重后 ${allContacts.length} 条`);
+    
+    res.json(allContacts);
   } catch (error) {
     console.error('获取联系信息失败:', error);
     res.status(500).json({ message: '服务器错误' });
@@ -284,12 +314,24 @@ router.delete('/:id', async (req, res) => {
     return res.status(401).json({ message: '需要管理员API密钥' });
   }
   try {
-    const contact = await Contact.findById(req.params.id);
-    if (!contact) {
-      return res.status(404).json({ message: '联系信息未找到' });
+    const id = req.params.id;
+    
+    // 如果是本地文件记录（以local-开头）
+    if (id.startsWith('local-')) {
+      const success = deleteLocalSubmission(id);
+      if (success) {
+        res.json({ message: '联系信息已删除' });
+      } else {
+        res.status(404).json({ message: '联系信息未找到' });
+      }
+    } else {
+      // MongoDB记录
+      const contact = await Contact.findByIdAndDelete(id);
+      if (!contact) {
+        return res.status(404).json({ message: '联系信息未找到' });
+      }
+      res.json({ message: '联系信息已删除' });
     }
-    await contact.remove();
-    res.json({ message: '联系信息已删除' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: '服务器错误' });
@@ -305,10 +347,71 @@ const SUBMISSIONS_PATH = path.join(PRIVATE_DIR, 'contact-submissions.jsonl')
 function appendSubmission(entry) {
   try {
     fs.mkdirSync(PRIVATE_DIR, { recursive: true })
-    const payload = { ...entry, createdAt: new Date().toISOString() }
+    const timestamp = new Date().toISOString()
+    const hash = crypto.createHash('md5')
+      .update(`${entry.name}${entry.email}${timestamp}`)
+      .digest('hex').substr(0, 8)
+    const payload = { 
+      ...entry, 
+      createdAt: timestamp,
+      _id: `local-${new Date(timestamp).getTime()}-${hash}`
+    }
     fs.appendFileSync(SUBMISSIONS_PATH, JSON.stringify(payload) + '\n')
   } catch (e) {
     console.log('写入私有提交文件失败', e)
+  }
+}
+
+// 删除本地提交记录
+function deleteLocalSubmission(id) {
+  try {
+    if (!fs.existsSync(SUBMISSIONS_PATH)) {
+      return false;
+    }
+    
+    const raw = fs.readFileSync(SUBMISSIONS_PATH, 'utf-8');
+    const lines = raw.split('\n').filter(Boolean);
+    let found = false;
+    
+    const filteredLines = lines.filter((line, index) => {
+      try {
+        const record = JSON.parse(line);
+        
+        // 如果记录有_id字段，直接比较
+        if (record._id === id) {
+          found = true;
+          return false; // 删除这一行
+        }
+        
+        // 如果记录没有_id字段，尝试生成相同的ID进行比较
+        if (!record._id) {
+          const timestamp = new Date(record.createdAt || Date.now()).getTime();
+          const hash = crypto.createHash('md5')
+            .update(`${record.name}${record.email}${timestamp}${index}`)
+            .digest('hex').substr(0, 8);
+          const generatedId = `local-${timestamp}-${hash}`;
+          
+          if (generatedId === id) {
+            found = true;
+            return false; // 删除这一行
+          }
+        }
+        
+        return true;
+      } catch (e) {
+        return true; // 保留无效的行
+      }
+    });
+    
+    if (found) {
+      fs.writeFileSync(SUBMISSIONS_PATH, filteredLines.join('\n') + '\n');
+      return true;
+    }
+    
+    return false;
+  } catch (error) {
+    console.error('删除本地记录失败:', error);
+    return false;
   }
 }
 
