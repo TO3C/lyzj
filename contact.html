@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 流云智炬科技工作室</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="font-sans">
+    <!-- 导航栏元素 -->
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center absolute top-0 left-0 right-0 z-100">
+        <a href="index.html" class="text-xl font-bold text-white">🌈 流云智炬科技</a>
+        <!-- 桌面端菜单 -->
+        <div class="hidden md:flex items-center gap-4">
+            <a href="services.html" class="px-4 py-2 text-white font-medium hover:bg-white/20 rounded-lg transition-all duration-300">💼 服务项目</a>
+            <a href="contact.html" class="px-4 py-2 text-white font-medium hover:bg-white/20 rounded-lg transition-all duration-300">📞 联系我们</a>
+        </div>
+        <!-- 移动端菜单按钮 -->
+        <button id="menu-btn" class="text-white focus:outline-none md:hidden">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+    </div>
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="hidden bg-gradient-to-r from-pink-300 to-blue-300 shadow-lg absolute top-16 left-0 right-0 z-100">
+        <div class="container mx-auto px-4 py-2">
+            <a href="index.html" class="block py-3 px-4 text-white font-medium hover:bg-white/20 rounded-lg">🏠 首页</a>
+            <a href="services.html" class="block py-3 px-4 text-white hover:bg-white/20 rounded-lg">💼 服务项目</a>
+            <a href="contact.html" class="block py-3 px-4 text-white hover:bg-white/20 rounded-lg">📞 联系我们</a>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <main>
+        <!-- 页面标题 -->
+        <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-3xl font-bold">联系我们</h1>
+                <p class="text-lg mt-2">如有任何需求或问题，欢迎随时联系我们</p>
+            </div>
+        </section>
+
+        <!-- 联系信息和表单 -->
+        <section class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold fade-in-up">联系我们</h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">如有任何需求或问题，欢迎随时联系我们</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 联系信息 -->
+                    <div class="card p-8 fade-in-up" style="animation-delay: 0.2s;">
+                        <h2 class="text-2xl font-bold mb-6">📞 联系方式</h2>
+                        
+                        <div class="space-y-6 mb-8">
+                            <div class="flex items-start gap-5">
+                                <div class="text-4xl mr-4">📱</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-1">📞 电话</h3>
+                                    <p class="text-gray-600 text-lg">138-0013-8000</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-5">
+                                <div class="text-4xl mr-4">📧</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-1">✉️ 邮箱</h3>
+                                    <p class="text-gray-600 text-lg">info@liuyunzhiju.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-5">
+                                <div class="text-4xl mr-4">📍</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-1">🏠 地址</h3>
+                                    <p class="text-gray-600 text-lg">三亚市天涯区解放路123号</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-5">
+                                <div class="text-4xl mr-4">⏰</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-1">🕒 营业时间</h3>
+                                    <p class="text-gray-600 text-lg">周一至周五：9:00 - 18:00</p>
+                                    <p class="text-gray-600 text-lg">周六至周日：10:00 - 16:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4">📱 关注我们</h3>
+                        <div class="flex gap-5">
+                            <a href="#" class="icon bg-gradient-to-br from-green-500 to-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center hover:shadow-lg transition-all duration-300 transform hover:scale-110 text-2xl">💚</a>
+                            <a href="#" class="icon bg-gradient-to-br from-red-500 to-pink-500 text-white w-14 h-14 rounded-full flex items-center justify-center hover:shadow-lg transition-all duration-300 transform hover:scale-110 text-2xl">❤️</a>
+                            <a href="#" class="icon bg-gradient-to-br from-blue-500 to-indigo-500 text-white w-14 h-14 rounded-full flex items-center justify-center hover:shadow-lg transition-all duration-300 transform hover:scale-110 text-2xl">💙</a>
+                            <a href="#" class="icon bg-gradient-to-br from-gray-700 to-gray-900 text-white w-14 h-14 rounded-full flex items-center justify-center hover:shadow-lg transition-all duration-300 transform hover:scale-110 text-2xl">💜</a>
+                        </div>
+                    </div>
+                    
+                    <!-- 客户预留信息表单 -->
+                    <div class="card p-8 fade-in-up" style="animation-delay: 0.4s;">
+                        <h2 class="text-2xl font-bold mb-6">客户预留信息</h2>
+                        <form id="contact-form" class="space-y-5">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">姓名</label>
+                                <input type="text" id="name" name="name" class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-color focus:border-primary-color transition-all duration-300" required>
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">电话</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-color focus:border-primary-color transition-all duration-300" required>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">邮箱</label>
+                                <input type="email" id="email" name="email" class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-color focus:border-primary-color transition-all duration-300" required>
+                            </div>
+                            
+                            <div>
+                                <label for="service" class="block text-gray-700 font-medium mb-2">业务类型</label>
+                                <select id="service" name="service" class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-color focus:border-primary-color transition-all duration-300 appearance-none bg-white cursor-pointer" required>
+                                    <option value="">请选择业务类型</option>
+                                    <option value="网站开发">网站开发</option>
+                                    <option value="网上营业厅">网上营业厅</option>
+                                    <option value="旅行社业务">旅行社业务</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-gray-700 font-medium mb-2">需求描述</label>
+                                <textarea id="message" name="message" rows="6" class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-color focus:border-primary-color transition-all duration-300 resize-none" required placeholder="请详细描述您的需求..."></textarea>
+                            </div>
+                            
+                            <div>
+                                <button type="submit" id="submit-btn" class="w-full btn bg-gradient-to-br from-primary-color to-purple-500 text-white py-4 px-6 rounded-xl font-semibold hover:from-purple-500 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                                    <span id="btn-text">提交信息</span>
+                                    <span id="btn-loading" class="hidden ml-3"><i class="fas fa-spinner fa-spin"></i></span>
+                                </button>
+                            </div>
+                            
+                            <div id="form-message" class="hidden p-4 rounded-xl text-center"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gradient-to-br from-purple-900 to-blue-900 text-white py-12 rounded-t-3xl">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-gray-300">
+                <p>🎉 &copy; 2025 流云智炬科技工作室. 保留所有权利. 💖</p>
+                <p class="mt-2 text-sm">琼ICP备2025064801号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/email.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

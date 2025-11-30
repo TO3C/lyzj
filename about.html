@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - 流云智炬科技工作室</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="font-sans">
+    <!-- 导航栏元素 -->
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center absolute top-0 left-0 right-0 z-100">
+        <a href="index.html" class="text-xl font-bold text-white">🌈 流云智炬科技</a>
+        <!-- 桌面端菜单 -->
+        <div class="hidden md:flex items-center gap-4">
+            <a href="services.html" class="px-4 py-2 text-white font-medium hover:bg-white/20 rounded-lg transition-all duration-300">💼 服务项目</a>
+            <a href="contact.html" class="px-4 py-2 text-white font-medium hover:bg-white/20 rounded-lg transition-all duration-300">📞 联系我们</a>
+        </div>
+        <!-- 移动端菜单按钮 -->
+        <button id="menu-btn" class="text-white focus:outline-none md:hidden">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+    </div>
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="hidden bg-gradient-to-r from-pink-300 to-blue-300 shadow-lg absolute top-16 left-0 right-0 z-100">
+        <div class="container mx-auto px-4 py-2">
+            <a href="index.html" class="block py-3 px-4 text-white font-medium hover:bg-white/20 rounded-lg">🏠 首页</a>
+            <a href="services.html" class="block py-3 px-4 text-white hover:bg-white/20 rounded-lg">💼 服务项目</a>
+            <a href="contact.html" class="block py-3 px-4 text-white hover:bg-white/20 rounded-lg">📞 联系我们</a>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <main>
+        <!-- 页面标题 -->
+        <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-3xl font-bold">关于我们</h1>
+                <p class="text-lg mt-2">了解流云智炬科技工作室的发展历程和团队实力</p>
+            </div>
+        </section>
+
+        <!-- 工作室介绍 -->
+        <section class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="card p-8 fade-in-up">
+                    <h2 class="text-3xl font-bold mb-6 text-center">🌈 流云智炬科技</h2>
+                    <p class="text-gray-600 mb-4 leading-relaxed">流云智炬科技工作室成立于2020年，位于美丽的三亚市 🏝️，是一家专业的互联网科技服务公司。我们致力于为客户提供高质量的网站开发、网上营业厅和旅行社服务。 🚀✨</p>
+                    <p class="text-gray-600 mb-4 leading-relaxed">工作室拥有一支经验丰富、技术精湛的专业团队 👨‍💻👩‍💻，成员均来自知名互联网公司，具有多年的行业经验。我们始终坚持以客户为中心 ❤️，以技术创新为驱动 💡，不断提升服务质量和客户满意度。</p>
+                    <p class="text-gray-600 leading-relaxed">我们的使命是通过互联网技术为客户创造价值 💰，帮助客户在数字化时代取得成功 🏆。我们的愿景是成为三亚地区最具影响力的互联网科技服务提供商 🌟。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 团队介绍 -->
+        <section class="py-16 bg-gradient-to-br from-pink-50 to-purple-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold fade-in-up">👥 我们的团队</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card p-8 text-center fade-in-up" style="animation-delay: 0.2s;">
+                        <div class="w-36 h-36 bg-gradient-to-br from-primary-color to-purple-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg float text-5xl">👨‍💼</div>
+                        <h3 class="text-2xl font-semibold mb-2">👑 张三</h3>
+                        <p class="text-primary-color mb-4 font-medium">创始人 & CEO 🚀</p>
+                        <p class="text-gray-600 leading-relaxed">10年互联网行业经验，曾任职于知名互联网公司，负责过多项大型项目的开发和管理。 🎓💼</p>
+                    </div>
+                    <div class="card p-8 text-center fade-in-up" style="animation-delay: 0.4s;">
+                        <div class="w-36 h-36 bg-gradient-to-br from-secondary-color to-orange-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg float text-5xl">👨‍💻</div>
+                        <h3 class="text-2xl font-semibold mb-2">💻 李四</h3>
+                        <p class="text-secondary-color mb-4 font-medium">技术总监 🔧</p>
+                        <p class="text-gray-600 leading-relaxed">8年网站开发经验，精通前端和后端技术，曾主导开发过多家企业官网和电商平台。 🎨🚀</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 发展历程 -->
+        <section class="py-16 bg-gradient-to-br from-blue-50 to-green-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold fade-in-up">📅 发展历程</h2>
+                </div>
+                <div class="card p-8 fade-in-up">
+                    <div class="space-y-10 relative">
+                        <!-- 时间线 -->
+                        <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-2 bg-gradient-to-b from-yellow-400 to-orange-500 h-full rounded-full"></div>
+                        
+                        <!-- 2020 -->
+                        <div class="flex flex-col md:flex-row gap-8 relative fade-in-up" style="animation-delay: 0.2s;">
+                            <div class="md:w-1/2 md:pr-12 md:text-right order-2 md:order-1">
+                                <h3 class="text-xl font-semibold mb-2">🎉 工作室成立</h3>
+                                <p class="text-gray-600">流云智炬科技工作室在三亚市正式成立，专注于网站开发服务。 🏠✨</p>
+                            </div>
+                            <div class="flex-shrink-0 w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg z-10 order-1 md:order-2 self-center">2020</div>
+                            <div class="md:w-1/2 md:pl-12 order-3"></div>
+                        </div>
+                        
+                        <!-- 2021 -->
+                        <div class="flex flex-col md:flex-row gap-8 relative fade-in-up" style="animation-delay: 0.3s;">
+                            <div class="md:w-1/2 md:pr-12 order-1"></div>
+                            <div class="flex-shrink-0 w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg z-10 order-2 self-center">2021</div>
+                            <div class="md:w-1/2 md:pl-12 order-3">
+                                <h3 class="text-xl font-semibold mb-2">📱 业务拓展</h3>
+                                <p class="text-gray-600">新增网上营业厅业务，开始办理中国移动、中国联通、中国电信的电话卡业务。 📲💳</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 2022 -->
+                        <div class="flex flex-col md:flex-row gap-8 relative fade-in-up" style="animation-delay: 0.4s;">
+                            <div class="md:w-1/2 md:pr-12 md:text-right order-2 md:order-1">
+                                <h3 class="text-xl font-semibold mb-2">🏖️ 服务升级</h3>
+                                <p class="text-gray-600">新增旅行社业务，提供三亚及周边地区的旅游线路、酒店预订、机票预订等服务。 ✈️🏨</p>
+                            </div>
+                            <div class="flex-shrink-0 w-20 h-20 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg z-10 order-1 md:order-2 self-center">2022</div>
+                            <div class="md:w-1/2 md:pl-12 order-3"></div>
+                        </div>
+                        
+                        <!-- 2023 -->
+                        <div class="flex flex-col md:flex-row gap-8 relative fade-in-up" style="animation-delay: 0.5s;">
+                            <div class="md:w-1/2 md:pr-12 order-1"></div>
+                            <div class="flex-shrink-0 w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg z-10 order-2 self-center">2023</div>
+                            <div class="md:w-1/2 md:pl-12 order-3">
+                                <h3 class="text-xl font-semibold mb-2">💡 技术创新</h3>
+                                <p class="text-gray-600">引入最新的前端和后端技术，提升服务质量和客户满意度。 🚀🔧</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 2024 -->
+                        <div class="flex flex-col md:flex-row gap-8 relative fade-in-up" style="animation-delay: 0.6s;">
+                            <div class="md:w-1/2 md:pr-12 md:text-right order-2 md:order-1">
+                                <h3 class="text-xl font-semibold mb-2">📈 业务增长</h3>
+                                <p class="text-gray-600">新增中国广电电话卡业务，服务客户数量突破1000家。 📞💯</p>
+                            </div>
+                            <div class="flex-shrink-0 w-20 h-20 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg z-10 order-1 md:order-2 self-center">2024</div>
+                            <div class="md:w-1/2 md:pl-12 order-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gradient-to-br from-purple-900 to-blue-900 text-white py-12 rounded-t-3xl">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-gray-300">
+                <p>🎉 &copy; 2025 流云智炬科技工作室. 保留所有权利. 💖</p>
+                <p class="mt-2 text-sm">琼ICP备2025064801号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
